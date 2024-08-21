@@ -1,0 +1,27 @@
+name: Sync XSD schemas delegate
+
+on:
+  repository_dispatch:
+    types: [ sync-xsd-schemas ]
+
+permissions:
+  contents: write
+
+jobs:
+  update-schemas:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update schemas file
+        run: |
+          echo "${{ github.event.client_payload.schema_content }}" | base64 -d > ./2024/ZeroVMap.xsd
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add ./2024/ZeroVMap.xsd
+          git commit -m "Update XSD schema"
+          git push
