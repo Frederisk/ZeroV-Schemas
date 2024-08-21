@@ -6,6 +6,7 @@
   targetNamespace="http://schemas.zerov.net/2024/ZeroVMap"
   elementFormDefault="qualified"
   attributeFormDefault="unqualified">
+  <!-- Test -->
   <!-- ZeroVMap -->
   <element name="ZeroVMap">
     <complexType>
